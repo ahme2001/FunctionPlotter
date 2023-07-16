@@ -1,4 +1,4 @@
-from main import *
+from GUI import *
 import pytest
 from pytestqt.qt_compat import qt_api
 
@@ -73,7 +73,7 @@ def test_invalid_function2(qtbot):
     window.min_input.setText("0")
     window.max_input.setText("10")
     window.plot_function()
-    assert window.statusBar().currentMessage() == "Error evaluating the function."
+    assert window.statusBar().currentMessage() == "Invalid function."
 
 def test_valid_function(qtbot):
     window = MainWindow()
