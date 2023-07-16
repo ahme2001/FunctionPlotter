@@ -30,6 +30,11 @@ def test_validation_convert_to_negative():
     assert flag == True
     assert expression == "x-5"
 
+def test_validation_repeated_x():
+    flag , expression = validate_expression("10*xx-9")
+    assert flag == True
+    assert expression == "10*x*x-9"
+
 def test_linear_function():
     func = 'x + 2'
     x_axis, y_axis = get_points(func, 0, 10)
