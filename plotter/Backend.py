@@ -1,20 +1,41 @@
 def validate_expression(expression):
-    valid_characters = '0123456789+-*/^x'
+    valid_characters = '0123456789+-*/^xX()'
     last_character = ''
     expression = expression.replace(" ", "")
     expression = expression.replace("+-", "-")
     expression = expression.replace("--", "+")
 
+    # Stack to keep track of opening parentheses
+    stack = []
+
     for character in expression:
         if character not in valid_characters:
             return False, expression
-        if character in '+*/^' and last_character in '+-*/^':
+        # Handle the case when "()" is missing multiplication
+        if character == '(' and last_character in '0123456789xX':
+            expression = expression.replace(last_character + '(', last_character + '*(')
+
+        # Check for balanced parentheses
+        if character == '(':
+            stack.append(character)
+        elif character == ')':
+            if not stack:
+                return False, expression
+            stack.pop()
+
+        if character in '+*/^' and last_character in '+-*/^(':
             return False, expression
-        if character == 'x' and last_character in '0123456789x' and last_character not in '':
+        if character == 'x' and last_character in '0123456789x)' and last_character not in '':
             expression = expression.replace(last_character + 'x', last_character + '*x')
         last_character = character
-    if last_character in '+-*/^':
-        return False , expression
+
+    # Check if parentheses are balanced
+    if stack:
+        return False, expression
+
+    if last_character in '+-*/^(':
+        return False, expression
+
     expression = expression.replace("^", "**")
 
     return True, expression

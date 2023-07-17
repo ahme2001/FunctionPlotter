@@ -10,6 +10,26 @@ def test_validation_has_2_operators_true():
     assert flag == True
     assert expression == "2*x+3*-5"
 
+def test_validation_has_parentheses_true():
+    flag , expression = validate_expression("2*x+(3*-5)")
+    assert flag == True
+    assert expression == "2*x+(3*-5)"
+
+def test_validation_has_parentheses2_true():
+    flag , expression = validate_expression("2(x)+(3*-5)")
+    assert flag == True
+    assert expression == "2*(x)+(3*-5)"
+
+def test_validation_has_parentheses_false():
+    flag , expression = validate_expression("2*x)+(3*-5)")
+    assert flag == False
+    assert expression == "2*x)+(3*-5)"
+
+def test_validation_has_parentheses2_false():
+    flag , expression = validate_expression("2*x+(3*-5)(")
+    assert flag == False
+    assert expression == "2*x+(3*-5)("
+
 def test_validation_convert_power_sign():
     flag , expression = validate_expression("2^x+3-5")
     assert flag == True
