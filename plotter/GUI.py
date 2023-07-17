@@ -1,22 +1,21 @@
 import sys
 
 from PySide2 import QtCore
-from PySide2.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QApplication
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QApplication
 from PySide2.QtCore import QTimer
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from Backend import *
 
-class MainWindow(QMainWindow):
+class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("Function Plotter")
-        self.setGeometry(100, 100, 800, 600)
+        self.setGeometry(100, 100, 680, 600)
 
         # Central Widget
         self.central_widget = QWidget(self)
-        self.setCentralWidget(self.central_widget)
         self.central_layout = QVBoxLayout(self.central_widget)
 
         # Input Widget
@@ -29,15 +28,15 @@ class MainWindow(QMainWindow):
         self.min_input = QLineEdit()
         self.max_label = QLabel("Enter Max value:")
         self.max_input = QLineEdit()
-        self.plot_button = QPushButton("Plot Funtion")
+        self.plot_button = QPushButton("Plot Function")
 
         self.input_layout.addWidget(self.function_label, 0, 0)
-        self.input_layout.addWidget(self.function_input, 0, 1,1,3)
+        self.input_layout.addWidget(self.function_input, 0, 1, 1, 3)
         self.input_layout.addWidget(self.min_label, 1, 0)
         self.input_layout.addWidget(self.min_input, 1, 1)
         self.input_layout.addWidget(self.max_label, 1, 2)
         self.input_layout.addWidget(self.max_input, 1, 3)
-        self.input_layout.addWidget(self.plot_button, 2, 0, 1, 2)
+        self.input_layout.addWidget(self.plot_button, 2, 3)
 
         self.central_layout.addWidget(self.input_widget)
 
@@ -119,8 +118,6 @@ class MainWindow(QMainWindow):
         if self.warning_message_box:
             self.warning_message_box.hide()
             self.warning_message_box = None
-
-
 
 
 if __name__ == "__main__":
