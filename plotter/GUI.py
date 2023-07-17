@@ -1,5 +1,8 @@
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget ,QStatusBar ,QGridLayout
+
+from PySide2 import QtCore
+from PySide2.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QApplication
+from PySide2.QtCore import QTimer
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from Backend import *
@@ -34,7 +37,7 @@ class MainWindow(QMainWindow):
         self.input_layout.addWidget(self.min_input, 1, 1)
         self.input_layout.addWidget(self.max_label, 1, 2)
         self.input_layout.addWidget(self.max_input, 1, 3)
-        self.input_layout.addWidget(self.plot_button, 2, 0, 1, 4)
+        self.input_layout.addWidget(self.plot_button, 2, 0, 1, 2)
 
         self.central_layout.addWidget(self.input_widget)
 
@@ -48,13 +51,15 @@ class MainWindow(QMainWindow):
 
         self.central_layout.addWidget(self.plot_widget)
 
-        # Status Bar
-        self.status_bar = QStatusBar(self)
-        self.setStatusBar(self.status_bar)
-        self.status_bar.setStyleSheet("QStatusBar{min-height: 30px;color:red;}")
-
         # Connect Plot Button
         self.plot_button.clicked.connect(self.plot_function)
+
+        # Warning Message Box
+        self.warning_message_box = None
+
+        # Warning Timer
+        self.warning_timer = QTimer(self)
+        self.warning_timer.timeout.connect(self.hide_warning)
 
     def plot_function(self):
         function = self.function_input.text()
@@ -98,7 +103,25 @@ class MainWindow(QMainWindow):
         self.canvas.draw()
 
     def display_message(self, message):
-        self.statusBar().showMessage(message)
+        # Hide existing warning message box if any
+        self.hide_warning()
+
+        # Create the warning message box
+        self.warning_message_box = QMessageBox(self)
+        self.warning_message_box.setText(message)
+        self.warning_message_box.setIcon(QMessageBox.Warning)
+        self.warning_message_box.setWindowFlags(self.warning_message_box.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
+        self.warning_message_box.show()
+
+        # Start the timer to hide the message box after 10 seconds
+        self.warning_timer.start(5000)  # 10000 milliseconds = 10 seconds
+
+    def hide_warning(self):
+        if self.warning_message_box:
+            self.warning_message_box.hide()
+            self.warning_message_box = None
+
+
 
 
 if __name__ == "__main__":
