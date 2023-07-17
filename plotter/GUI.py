@@ -113,8 +113,7 @@ class MainWindow(QMainWindow):
         self.warning_message_box.setWindowFlags(self.warning_message_box.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
         self.warning_message_box.show()
 
-        # Start the timer to hide the message box after 10 seconds
-        self.warning_timer.start(5000)  # 10000 milliseconds = 10 seconds
+        self.warning_timer.start(5000)
 
     def hide_warning(self):
         if self.warning_message_box:
