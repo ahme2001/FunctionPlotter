@@ -46,19 +46,19 @@ pytest
 ```
 ## snapshots 
 - Correct Inputs
-    - ![test case 1](assets\1.png) 
-    - ![test case 2](assets\2.png) 
-    - ![test case 3](assets\3.png) 
-    - ![test case 4](assets\9.png) 
-    - ![test case 5](assets\10.png) 
+    - ![test case 1](assets/1.png) 
+    - ![test case 2](assets/2.png) 
+    - ![test case 3](assets/3.png) 
+    - ![test case 4](assets/9.png) 
+    - ![test case 5](assets/10.png) 
 
 - Wrong Inputs
-    - ![test case 1](assets\4.png) 
-    - ![test case 2](assets\5.png) 
-    - ![test case 3](assets\6.png) 
-    - ![test case 4](assets\7.png) 
-    - ![test case 5](assets\8.png)
-    - ![test case 6](assets\11.png) 
+    - ![test case 1](assets/4.png) 
+    - ![test case 2](assets/5.png) 
+    - ![test case 3](assets/6.png) 
+    - ![test case 4](assets/7.png) 
+    - ![test case 5](assets/8.png)
+    - ![test case 6](assets/11.png) 
 
 ## License
 Feel free to use and modify it according to your needs.
