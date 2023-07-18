@@ -29,7 +29,7 @@ The main components of the code are:
 
 3. Integration with Matplotlib: The program utilizes Matplotlib to plot the user-entered function.
 
-4. validate_expression function: This function is responsible for validating the user-entered function. It checks for invalid characters and ensures that the expression is well-formed.
+4. validate_expression function: This function is responsible for validating the user-entered function. It checks for invalid characters and ensures that the expression is well-formed. remove all white-spaces from expression and add * if number is written behind x directly eg. `2x => 2*x`. check also for correct parenthesis `()`
 
 5. get_points function: This function calculates the (x, y) points required for plotting the function over the specified range of x values.
 
